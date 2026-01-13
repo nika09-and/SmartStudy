@@ -5,6 +5,8 @@
   height: 120px;
   background-color: #1a1c1e;
   padding: 0 40px;
+  box-sizing: border-box;
+  justify-content: space-between;
 }
 
 .leftSide,
@@ -18,4 +20,91 @@
 
 .leftSide {
   gap: 10px;
+}
+
+.midSide {
+  justify-content: center;
+}
+
+.rightSide {
+  justify-content: end;
+  gap: 20px;
+}
+
+.searchInput {
+  height: 40px;
+  width: 80%;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  padding: 0 20px;
+  background-color: #272a30;
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.searchInput::placeholder {
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+}
+
+.logInLink {
+  font-size: 16px;
+  margin-left: 40px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.logInLink:hover {
+  color: #6a5be2;
+}
+
+.notifications {
+  all: unset;
+  cursor: pointer;
+}
+
+.notifications:focus {
+  all: unset;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1600px) {
+  .leftSide {
+    width: 20%;
+  }
+
+  .midSide {
+    width: 50%;
+  }
+
+  .rightSide {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 1450px) {
+  .leftSide {
+    width: 20%;
+  }
+
+  .midSide {
+    width: 40%;
+  }
+
+  .rightSide {
+    width: 40%;
+  }
+
+  .searchInput {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .logInLink {
+    margin-left: 20px;
+  }
 }

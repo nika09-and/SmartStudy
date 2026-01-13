@@ -1,4 +1,10 @@
 #root {
+  width: 100%;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  width: 100vw;
 }
 
 .App {
