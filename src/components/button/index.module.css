@@ -1,0 +1,27 @@
+.button {
+  all: unset;
+  display: flex;
+  color: #ffffff;
+  font-size: 20px;
+  border-radius: 30px;
+  font-weight: 600;
+  margin-top: 20px;
+  width: 169px;
+  height: 47px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button:focus {
+  outline: none;
+  border: none;
+}
+
+.button:active {
+  outline: none;
+  border: none;
+  width: 160px;
+  height: 43px;
+}

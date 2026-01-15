@@ -5,6 +5,13 @@
 body {
   font-family: "Poppins", sans-serif;
   width: 100vw;
+  background: radial-gradient(
+    circle at 15% 20%,
+    #111317 50%,
+    #272549 100%,
+    #3e387d 40%,
+    #6b5ce2 30%
+  );
 }
 
 .App {
@@ -14,13 +21,41 @@ body {
   min-width: 100vw;
 }
 
+.middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .mainText {
-  font-size: 60px;
+  font-size: 80px;
   font-weight: 800;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 50px;
+  color: #ffffff;
+  margin-bottom: 0;
+  line-height: 100px;
 }
 
 .studyAssistant {
   color: #6a5be2;
+}
+
+.homeDescription {
+  font-size: 18px;
+  text-align: center;
+  max-width: 700px;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 1200px) {
+  .mainText {
+    font-size: 60px;
+    line-height: 80px;
+  }
+
+  .homeDescription {
+    font-size: 14px;
+    max-width: 500px;
+  }
 }

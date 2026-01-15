@@ -21,6 +21,8 @@
   padding: 8px 0;
   border-bottom: 2px solid transparent;
   transition: border-color 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 .navLink:hover {
