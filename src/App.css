@@ -13,3 +13,14 @@ body {
   min-height: 100vh;
   min-width: 100vw;
 }
+
+.mainText {
+  font-size: 60px;
+  font-weight: 800;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.studyAssistant {
+  color: #6a5be2;
+}
