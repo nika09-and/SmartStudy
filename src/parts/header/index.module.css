@@ -91,15 +91,15 @@
   }
 
   .midSide {
-    width: 40%;
+    width: 30%;
   }
 
   .rightSide {
-    width: 40%;
+    width: 50%;
   }
 
   .searchInput {
-    width: 90%;
+    width: 100%;
   }
 }
 
