@@ -1,27 +1,20 @@
-import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./parts/header";
 import "./App.css";
-import Button from "./components/button";
+import Home from "./pages/Home";
+import Library from "./pages/Library";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-
-      <div className="middle">
-        <p className="mainText">
-          Your Personal <br />
-          <span className="studyAssistant">Study Assistant</span>
-        </p>
-
-        <p className="homeDescription">
-          We’ll turn your subject it into a personalized study book with
-          interactive quizzes and flashcards. Learn smarter, not harder.
-        </p>
-
-        <Button text="Add Subject" color="#6a5be2" />
+    <Router>
+      <div className="App">
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/library" element={<Library />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 

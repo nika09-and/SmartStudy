@@ -1,13 +1,16 @@
+import { Link, useLocation } from "react-router-dom";
 import styles from "./Navigation.module.css";
 import FaHome from "../../assets/faHome.svg";
 import FaLibrary from "../../assets/faLibrary.svg";
 import FaCreate from "../../assets/faCreate.svg";
 
 const Navigation = () => {
+  const location = useLocation();
+
   const navItems = [
-    { label: "Home", href: "#", icon: FaHome },
-    { label: "Library", href: "#", icon: FaLibrary },
-    { label: "Create", href: "#", icon: FaCreate },
+    { label: "Home", path: "/", icon: FaHome },
+    { label: "Library", path: "/library", icon: FaLibrary },
+    { label: "Create", path: "/create", icon: FaCreate },
   ];
 
   return (
@@ -15,14 +18,19 @@ const Navigation = () => {
       <ul className={styles.navList}>
         {navItems.map((item, index) => (
           <li key={index}>
-            <a href={item.href} className={styles.navLink}>
+            <Link
+              to={item.path}
+              className={`${styles.navLink} ${
+                location.pathname === item.path ? styles.active : ""
+              }`}
+            >
               <img
                 src={item.icon}
                 alt={item.label}
                 style={{ marginRight: "8px", width: "20px", height: "20px" }}
               />
               {item.label}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
