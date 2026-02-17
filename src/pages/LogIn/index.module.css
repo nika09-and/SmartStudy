@@ -316,3 +316,139 @@ p {
     font-size: 10px;
   }
 }
+
+@media screen and (max-height: 620px) {
+  .logInContainer {
+    width: 280px;
+    padding: 25px 25px;
+  }
+
+  .images {
+    width: 50%;
+  }
+
+  .upperMain {
+    height: 10%;
+  }
+
+  .lowerMain {
+    gap: 10px;
+  }
+
+  .upperMainText {
+    font-size: 12px;
+  }
+
+  .upperMainSubText {
+    font-size: 8px;
+  }
+
+  .googleLogIn,
+  .gitHubLogIn {
+    height: 30px;
+    border-radius: 10px;
+  }
+
+  .logInForm {
+    gap: 5px;
+  }
+
+  .label {
+    font-size: 8px;
+  }
+
+  .emailContaier,
+  .passContaier {
+    gap: 5px;
+  }
+
+  .input {
+    height: 30px;
+    font-size: 8px;
+    border-radius: 10px;
+    padding: 0 20px;
+  }
+
+  .forgotPassText,
+  .createText {
+    font-size: 8px;
+  }
+
+  .forgotPassLink,
+  .signUpLink {
+    font-size: 8px;
+  }
+
+  .logInButton {
+    height: 30px;
+    font-size: 8px;
+  }
+}
+
+@media screen and (max-height: 550px) {
+  .logInContainer {
+    width: 230px;
+    padding: 25px 25px;
+  }
+
+  .images {
+    width: 50%;
+  }
+
+  .upperMain {
+    height: 10%;
+  }
+
+  .lowerMain {
+    gap: 10px;
+  }
+
+  .upperMainText {
+    font-size: 10px;
+  }
+
+  .upperMainSubText {
+    font-size: 5px;
+  }
+
+  .googleLogIn,
+  .gitHubLogIn {
+    height: 25px;
+    border-radius: 8px;
+  }
+
+  .logInForm {
+    gap: 5px;
+  }
+
+  .label {
+    font-size: 5px;
+  }
+
+  .emailContaier,
+  .passContaier {
+    gap: 5px;
+  }
+
+  .input {
+    height: 25px;
+    font-size: 5px;
+    border-radius: 5px;
+    padding: 0 20px;
+  }
+
+  .forgotPassText,
+  .createText {
+    font-size: 5px;
+  }
+
+  .forgotPassLink,
+  .signUpLink {
+    font-size: 5px;
+  }
+
+  .logInButton {
+    height: 25px;
+    font-size: 5px;
+  }
+}

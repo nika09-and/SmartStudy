@@ -16,10 +16,10 @@ const LogIn = () => {
         <div className={styles.lowerMain}>
           <div className={styles.easyLogIn}>
             <div className={styles.googleLogIn}>
-              <img src={google} alt="Google Logo" />
+              <img src={google} alt="Google Logo" className={styles.images} />
             </div>
             <div className={styles.gitHubLogIn}>
-              <img src={gitHub} alt="GitHub Logo" />
+              <img src={gitHub} alt="GitHub Logo" className={styles.images} />
             </div>
           </div>
           <img src={divider} alt="divider" className={styles.divider} />
