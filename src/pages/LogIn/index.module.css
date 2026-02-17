@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.5s ease;
 }
 
 p {
@@ -31,6 +32,7 @@ p {
   justify-content: space-between;
   padding: 40px 40px;
   box-sizing: border-box;
+  transition: all 0.5s ease;
 }
 
 .upperMain {
@@ -42,6 +44,7 @@ p {
   align-items: center;
   justify-content: start;
   gap: 10px;
+  transition: all 0.5s ease;
 }
 
 .lowerMain {
@@ -52,18 +55,20 @@ p {
   align-items: center;
   justify-content: space-between;
   gap: 40px;
-  transition: all 1s ease;
+  transition: all 0.5s ease;
 }
 
 .upperMainText {
   font-size: 25px;
   font-weight: 600;
   color: #fff;
+  transition: all 0.5s ease;
 }
 
 .upperMainSubText {
   font-size: 15px;
   color: #fff;
+  transition: all 0.5s ease;
 }
 
 .easyLogIn {
@@ -71,6 +76,7 @@ p {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  transition: all 0.5s ease;
 }
 
 .googleLogIn,
@@ -85,6 +91,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.5s ease;
 }
 
 .googleLogIn:hover,
@@ -97,11 +104,13 @@ p {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  transition: all 0.5s ease;
 }
 
 .label {
   font-size: 16px;
   color: #fff;
+  transition: all 0.5s ease;
 }
 
 .emailContaier,
@@ -111,6 +120,7 @@ p {
   flex-direction: column;
   gap: 10px;
   justify-content: start;
+  transition: all 0.5s ease;
 }
 
 .input {
@@ -123,6 +133,7 @@ p {
   box-sizing: border-box;
   color: #fff;
   font-size: 16px;
+  transition: all 0.5s ease;
 }
 
 .input:focus {
@@ -134,6 +145,7 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: start;
+  transition: all 0.5s ease;
 }
 
 .forgotPassText,
@@ -142,6 +154,7 @@ p {
   color: #ffffffa2;
   margin: 0;
   margin-right: 5px;
+  transition: all 0.5s ease;
 }
 
 .forgotPassLink,
@@ -149,6 +162,7 @@ p {
   font-size: 16px;
   color: #ffffff;
   cursor: pointer;
+  transition: all 0.5s ease;
 }
 
 .logInButton {
@@ -163,6 +177,11 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.5s ease;
+}
+
+.divider {
+  width: 100%;
 }
 
 @media screen and (max-height: 950px) {
@@ -174,5 +193,64 @@ p {
 @media screen and (max-height: 870px) {
   .lowerMain {
     gap: 10px;
+  }
+}
+
+@media screen and (max-height: 800px) {
+  .logInContainer {
+    width: 400px;
+  }
+  .upperMain {
+    height: 10%;
+  }
+
+  .lowerMain {
+    gap: 20px;
+  }
+
+  .upperMainText {
+    font-size: 20px;
+  }
+
+  .upperMainSubText {
+    font-size: 13px;
+  }
+
+  .googleLogIn,
+  .gitHubLogIn {
+    height: 40px;
+  }
+
+  .logInForm {
+    gap: 10px;
+  }
+
+  .label {
+    font-size: 13px;
+  }
+
+  .emailContaier,
+  .passContaier {
+    gap: 5px;
+  }
+
+  .input {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .forgotPassText,
+  .createText {
+    font-size: 13px;
+  }
+
+  .forgotPassLink,
+  .signUpLink {
+    font-size: 13px;
+  }
+
+  .logInButton {
+    height: 40px;
+    font-size: 13px;
   }
 }
