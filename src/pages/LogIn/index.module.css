@@ -1,0 +1,178 @@
+.wholeContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  margin: 0;
+}
+
+.logInContainer {
+  width: 500px;
+  height: 90%;
+  background-color: #0e0f0f;
+  border-radius: 30px;
+  position: relative;
+  border: 1px solid transparent;
+  background-image:
+    linear-gradient(#0e0f0f, #0e0f0f),
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.363),
+      rgba(255, 255, 255, 0)
+    );
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 40px;
+  box-sizing: border-box;
+}
+
+.upperMain {
+  width: 100%;
+  height: 15%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
+
+.lowerMain {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  transition: all 1s ease;
+}
+
+.upperMainText {
+  font-size: 25px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.upperMainSubText {
+  font-size: 15px;
+  color: #fff;
+}
+
+.easyLogIn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.googleLogIn,
+.gitHubLogIn {
+  width: 48%;
+  height: 50px;
+  background-color: none;
+  border: 1px solid #ffffff3f;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.googleLogIn:hover,
+.gitHubLogIn:hover {
+  background-color: #ffffff3f;
+}
+
+.logInForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.label {
+  font-size: 16px;
+  color: #fff;
+}
+
+.emailContaier,
+.passContaier {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: start;
+}
+
+.input {
+  width: 100%;
+  height: 50px;
+  background-color: #ffffff1a;
+  border: none;
+  border-radius: 10px;
+  padding: 0 30px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 16px;
+}
+
+.input:focus {
+  outline: 1px solid #6a5be2;
+}
+
+.forgotPass,
+.CreateAccount {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.forgotPassText,
+.createText {
+  font-size: 16px;
+  color: #ffffffa2;
+  margin: 0;
+  margin-right: 5px;
+}
+
+.forgotPassLink,
+.signUpLink {
+  font-size: 16px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.logInButton {
+  width: 100%;
+  height: 50px;
+  background-color: #6a5be2;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-height: 950px) {
+  .lowerMain {
+    gap: 20px;
+  }
+}
+
+@media screen and (max-height: 870px) {
+  .lowerMain {
+    gap: 10px;
+  }
+}

@@ -3,6 +3,7 @@ import logoIcon from "../../assets/SmartStudy-icon.svg";
 import Navigation from "../../components/navigation/Navigation";
 import profile from "../../assets/profileLink.svg";
 import notificationsYes from "../../assets/notification-eys.svg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -19,9 +20,9 @@ const Header = () => {
       </div>
       <div className={styles.rightSide}>
         <Navigation />
-        <a href="#" className={styles.logInLink}>
+        <Link to="/login" className={styles.logInLink}>
           Log In
-        </a>
+        </Link>
         <a href="#" className={styles.profileLink}>
           <img src={profile} alt="profile" />
         </a>
