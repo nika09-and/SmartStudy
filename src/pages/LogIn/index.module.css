@@ -254,3 +254,65 @@ p {
     font-size: 13px;
   }
 }
+
+@media screen and (max-height: 720px) {
+  .logInContainer {
+    width: 350px;
+  }
+  .upperMain {
+    height: 10%;
+  }
+
+  .lowerMain {
+    gap: 15px;
+  }
+
+  .upperMainText {
+    font-size: 15px;
+  }
+
+  .upperMainSubText {
+    font-size: 10px;
+  }
+
+  .googleLogIn,
+  .gitHubLogIn {
+    height: 35px;
+    border-radius: 10px;
+  }
+
+  .logInForm {
+    gap: 5px;
+  }
+
+  .label {
+    font-size: 10px;
+  }
+
+  .emailContaier,
+  .passContaier {
+    gap: 5px;
+  }
+
+  .input {
+    height: 35px;
+    font-size: 10px;
+    border-radius: 10px;
+    padding: 0 20px;
+  }
+
+  .forgotPassText,
+  .createText {
+    font-size: 10px;
+  }
+
+  .forgotPassLink,
+  .signUpLink {
+    font-size: 10px;
+  }
+
+  .logInButton {
+    height: 35px;
+    font-size: 10px;
+  }
+}
