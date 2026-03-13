@@ -1,0 +1,46 @@
+$kind: http-request
+method: POST
+url: 'http://localhost:5000/api/login'
+order: 2000
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "email": "andriadze.n1@gmail.com",
+      "password": "chemikupi1234"
+    }
+scripts:
+  - type: afterResponse
+    language: text/javascript
+    code: |-
+      // Basic response checks
+      pm.test('Status code is 200 or 201', () => {
+        pm.expect([200, 201]).to.include(pm.response.code);
+      });
+
+      pm.test('Response is JSON', () => {
+        pm.response.to.be.json;
+      });
+
+      // Capture useful values to collection variables (optional)
+      let json;
+      try {
+        json = pm.response.json();
+      } catch (e) {
+        json = null;
+      }
+
+      if (json) {
+        const token = json.token ?? json.accessToken;
+        if (token) {
+          pm.collectionVariables.set('token', String(token));
+          pm.collectionVariables.set('accessToken', String(token));
+        }
+
+        if (json.user) {
+          pm.collectionVariables.set('user', JSON.stringify(json.user));
+        }
+      }

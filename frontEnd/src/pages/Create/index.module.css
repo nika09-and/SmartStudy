@@ -1,0 +1,360 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 80px 80px;
+  box-sizing: border-box;
+  background-color: #101213;
+  overflow: hidden;
+}
+
+.containerNotLogged {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding: 80px 80px;
+  box-sizing: border-box;
+  background-color: #101213;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 90%;
+  background-color: #1a1c1e;
+  border-radius: 30px;
+  padding: 40px 80px;
+  box-sizing: border-box;
+  justify-content: space-between;
+}
+
+.title,
+.description,
+.categories,
+.color,
+.file {
+  font-weight: 400;
+  margin: 0;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.titleNotLogged {
+  font-weight: 40px;
+  margin: 0;
+  font-size: 40px;
+  color: #ffffff;
+}
+
+.subtitle {
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 12px;
+}
+
+.loginRedirect {
+  margin-top: 24px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid #6a5be2;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.loginRedirect:hover {
+  background: rgba(106, 91, 226, 0.15);
+}
+
+.formHeader {
+  font-size: 30px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0;
+}
+
+.formTop {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 10px;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.titleLine,
+.descriptionLine,
+.categoriesLine,
+.colorLine,
+.fileLine {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.indicatorTitle,
+.indicatorDescription,
+.indicatorCategories,
+.indicatorColor,
+.indicatorFile {
+  width: 19px;
+  height: 19px;
+  border-radius: 30px;
+  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.titleInput,
+.descriptionInput {
+  width: 100%;
+  height: 50px;
+  border: 2px solid #6b5ce2;
+  background-color: #101213;
+  border-radius: 10px;
+  padding: 0px 20px;
+  box-sizing: border-box;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.descriptionInput {
+  height: 180px;
+  resize: vertical;
+  padding: 15px 20px;
+  font-family: inherit;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-y: auto;
+}
+
+.titleInput:focus {
+  outline: none;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 90px;
+  justify-content: space-between;
+}
+
+.bottomLeft {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bottomMid {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bottomRight {
+  width: 18%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: width 1s ease-in-out;
+}
+
+.categoriesSelect {
+  width: 80%;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+option:checked {
+  background-color: #6b5ce2;
+  color: white;
+}
+
+.selectToggle {
+  width: 100%;
+  height: 40px;
+  border: 2px solid #6b5ce2;
+  background-color: #101213;
+  border-radius: 10px;
+  padding: 0 14px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.selectToggle:hover {
+  border: 2px solid #fff;
+}
+
+.selectToggle:focus {
+  border: 2px solid #6b5ce2;
+}
+
+.optionsList {
+  position: absolute;
+  top: calc(40px + 8px);
+  left: 0;
+  width: 100%;
+  max-height: 180px;
+  overflow-y: auto;
+  background: #1a1c1e;
+  border: 2px solid #6b5ce2;
+  border-radius: 10px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  z-index: 20;
+}
+
+.optionItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0px 14px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.optionItem:hover {
+  background: #2b2b2b; /* change this to any hover color you want */
+}
+
+.optionLabel {
+  user-select: none;
+}
+
+.chev {
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.optionCheckbox {
+  display: none;
+  background-color: #6b5ce2;
+}
+
+.checkmark {
+  width: 10px;
+  height: 10px;
+  background-color: #ccc;
+  display: inline-block;
+  border: none;
+}
+
+.optionCheckbox:checked + .checkmark {
+  background-color: #6b5ce2;
+}
+
+.colorOptions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.colorOption {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+}
+
+.colorOption:hover {
+  scale: 1.1;
+  border: 3px solid #ffffff;
+}
+
+.colorOption:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(107, 92, 226, 0.12);
+}
+
+.selectedColor {
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 6px rgba(107, 92, 226, 0.08);
+}
+
+.fileUpload {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 1600px) {
+  .bottomRight {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .bottomRight {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .colorOptions {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .colorOptions {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .colorOptions {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .colorOptions {
+    width: 100%;
+  }
+}
+
+@media screen and (max-height: 900px) {
+  .descriptionInput {
+    height: 150px;
+  }
+}
+
+@media screen and (max-height: 850px) {
+  .descriptionInput {
+    height: 100px;
+  }
+}
