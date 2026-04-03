@@ -602,6 +602,10 @@ option:checked {
     font-size: 14px;
   }
 
+  .descriptionInput {
+    height: 80px;
+  }
+
   .titleNotLogged {
     font-size: 20px;
   }
@@ -612,6 +616,17 @@ option:checked {
 
   .formHeader {
     font-size: 18px;
+  }
+
+  .titleContainer,
+  .bottomLeft,
+  .bottomMid,
+  .bottomRight {
+    gap: 10px;
+    justify-content: start;
+  }
+
+  .fileUpload {
   }
 
   .indicatorTitle,
@@ -660,6 +675,14 @@ option:checked {
 
   .formHeader {
     font-size: 15px;
+  }
+
+  .titleInput {
+    height: 40px;
+  }
+
+  .descriptionInput {
+    height: 60px;
   }
 
   .indicatorTitle,
