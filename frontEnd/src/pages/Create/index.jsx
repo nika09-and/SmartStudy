@@ -234,7 +234,11 @@ const Create = () => {
               <p className={styles.file}>File</p>
               <div
                 className={`${styles.indicatorFile} ${styles[getIndicatorState("file", !!file)]}`}
-                title={file ? `File selected: ${file.name}` : "Upload a file for the subject"}
+                title={
+                  file
+                    ? `File selected: ${file.name}`
+                    : "Upload a file for the subject"
+                }
               >
                 i
               </div>
@@ -262,7 +266,8 @@ const Create = () => {
                 color="#6a5be2"
                 height="40px"
                 width="120px"
-                fontSize="16px" />
+                fontSize="16px"
+              />
             </div>
           </div>
         </div>
