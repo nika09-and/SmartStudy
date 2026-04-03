@@ -2,13 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: start;
-  justify-content: space-between;
+  justify-content: start;
   height: 100%;
   width: 100%;
   padding: 80px 80px;
   box-sizing: border-box;
   background-color: #101213;
   overflow: hidden;
+  transition: all 0.5s ease;
+  gap: 50px;
 }
 
 .containerNotLogged {
@@ -24,13 +26,14 @@
   overflow: hidden;
   justify-content: center;
   align-items: center;
+  transition: all 0.5s ease;
 }
 
 .form {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 90%;
+  height: 80%;
   background-color: #1a1c1e;
   border-radius: 30px;
   padding: 40px 80px;
@@ -121,6 +124,89 @@
   justify-content: center;
   font-weight: 700;
   font-size: 15px;
+  cursor: help;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Indicator states */
+.indicatorTitle.default,
+.indicatorDescription.default,
+.indicatorCategories.default,
+.indicatorColor.default,
+.indicatorFile.default {
+  background-color: aliceblue;
+  color: #333;
+}
+
+.indicatorTitle.filled,
+.indicatorDescription.filled,
+.indicatorCategories.filled,
+.indicatorColor.filled,
+.indicatorFile.filled {
+  background-color: #4caf50;
+  color: white;
+}
+
+.indicatorTitle.filled,
+.indicatorDescription.filled,
+.indicatorCategories.filled,
+.indicatorColor.filled,
+.indicatorFile.filled {
+  background-color: #4caf50;
+  color: white;
+}
+
+.indicatorTitle.empty,
+.indicatorDescription.empty,
+.indicatorCategories.empty,
+.indicatorColor.empty,
+.indicatorFile.empty {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Tooltip styles */
+.indicatorTitle:hover::after,
+.indicatorDescription:hover::after,
+.indicatorCategories:hover::after,
+.indicatorColor:hover::after,
+.indicatorFile:hover::after {
+  content: attr(title);
+  position: absolute;
+  top: 50%;
+  left: 25px;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+  z-index: 1000;
+  opacity: 1;
+  pointer-events: none;
+  width: 200px;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.indicatorTitle:hover::before,
+.indicatorDescription:hover::before,
+.indicatorCategories:hover::before,
+.indicatorColor:hover::before,
+.indicatorFile:hover::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 19px;
+  transform: translateY(-50%);
+  border: 6px solid transparent;
+  border-right-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  opacity: 1;
+  pointer-events: none;
 }
 
 .titleInput,
@@ -356,5 +442,277 @@ option:checked {
 @media screen and (max-height: 850px) {
   .descriptionInput {
     height: 100px;
+  }
+}
+
+@media screen and (max-height: 950px) {
+  .container {
+    padding: 60px 60px;
+  }
+
+  .containerNotLogged {
+    padding: 60px 60px;
+  }
+
+  .form {
+    padding: 30px 60px;
+  }
+
+  .title,
+  .description,
+  .categories,
+  .color,
+  .file {
+    font-size: 18px;
+  }
+
+  .titleNotLogged {
+    font-size: 35px;
+  }
+
+  .subtitle {
+    font-size: 18px;
+  }
+
+  .formHeader {
+    font-size: 25px;
+  }
+
+  .indicatorTitle,
+  .indicatorDescription,
+  .indicatorCategories,
+  .indicatorColor,
+  .indicatorFile {
+    width: 17px;
+    height: 17px;
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-height: 870px) {
+  .container {
+    padding: 50px 50px;
+  }
+
+  .containerNotLogged {
+    padding: 50px 50px;
+  }
+
+  .form {
+    padding: 25px 50px;
+  }
+
+  .title,
+  .description,
+  .categories,
+  .color,
+  .file {
+    font-size: 16px;
+  }
+
+  .titleNotLogged {
+    font-size: 30px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .formHeader {
+    font-size: 22px;
+  }
+
+  .titleInput,
+  .descriptionInput {
+    font-size: 14px;
+  }
+
+  .selectToggle {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-height: 800px) {
+  .container {
+    padding: 40px 40px;
+  }
+
+  .containerNotLogged {
+    padding: 40px 40px;
+  }
+
+  .form {
+    padding: 20px 40px;
+  }
+
+  .title,
+  .description,
+  .categories,
+  .color,
+  .file {
+    font-size: 14px;
+  }
+
+  .titleNotLogged {
+    font-size: 25px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .formHeader {
+    font-size: 20px;
+  }
+
+  .indicatorTitle,
+  .indicatorDescription,
+  .indicatorCategories,
+  .indicatorColor,
+  .indicatorFile {
+    width: 15px;
+    height: 15px;
+    font-size: 11px;
+  }
+
+  .bottomRight {
+    width: 25%;
+  }
+}
+
+@media screen and (max-height: 720px) {
+  .container {
+    padding: 30px 30px;
+    gap: 30px;
+  }
+
+  .containerNotLogged {
+    padding: 30px 30px;
+  }
+
+  .form {
+    padding: 15px 30px;
+  }
+
+  .title,
+  .description,
+  .categories,
+  .color,
+  .file {
+    font-size: 14px;
+  }
+
+  .titleNotLogged {
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .formHeader {
+    font-size: 18px;
+  }
+
+  .indicatorTitle,
+  .indicatorDescription,
+  .indicatorCategories,
+  .indicatorColor,
+  .indicatorFile {
+    width: 15px;
+    height: 15px;
+    font-size: 10px;
+  }
+
+  .bottomRight {
+    width: 30%;
+  }
+}
+
+@media screen and (max-height: 620px) {
+  .container {
+    padding: 20px 20px;
+  }
+
+  .containerNotLogged {
+    padding: 20px 20px;
+  }
+
+  .form {
+    padding: 10px 20px;
+  }
+
+  .title,
+  .description,
+  .categories,
+  .color,
+  .file {
+    font-size: 10px;
+  }
+
+  .titleNotLogged {
+    font-size: 15px;
+  }
+
+  .subtitle {
+    font-size: 10px;
+  }
+
+  .formHeader {
+    font-size: 15px;
+  }
+
+  .indicatorTitle,
+  .indicatorDescription,
+  .indicatorCategories,
+  .indicatorColor,
+  .indicatorFile {
+    width: 11px;
+    height: 11px;
+    font-size: 7px;
+  }
+}
+
+@media screen and (max-height: 550px) {
+  .container {
+    padding: 15px 15px;
+  }
+
+  .containerNotLogged {
+    padding: 15px 15px;
+  }
+
+  .form {
+    padding: 8px 15px;
+  }
+
+  .title,
+  .description,
+  .categories,
+  .color,
+  .file {
+    font-size: 8px;
+  }
+
+  .titleNotLogged {
+    font-size: 12px;
+  }
+
+  .subtitle {
+    font-size: 8px;
+  }
+
+  .formHeader {
+    font-size: 12px;
+  }
+
+  .indicatorTitle,
+  .indicatorDescription,
+  .indicatorCategories,
+  .indicatorColor,
+  .indicatorFile {
+    width: 12px;
+    height: 12px;
+    font-size: 7px;
   }
 }

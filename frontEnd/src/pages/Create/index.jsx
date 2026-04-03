@@ -16,6 +16,19 @@ const Create = () => {
   const dropdownRef = useRef(null);
   const [colorSelected, setColorSelected] = useState("");
 
+  // New state for field tracking
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState(null);
+  const [touchedFields, setTouchedFields] = useState({
+    title: false,
+    description: false,
+    categories: false,
+    color: false,
+    file: false,
+  });
+  const fileInputRef = useRef(null);
+
   const colorOptionsList = [
     { id: "purple", color: "#6b5ce2" },
     { id: "blue", color: "#2B85FF" },
@@ -41,10 +54,42 @@ const Create = () => {
     return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
 
-  const toggleOption = (val) =>
-    setSelected((s) =>
-      s.includes(val) ? s.filter((x) => x !== val) : [...s, val],
-    );
+  const toggleOption = (val) => {
+    const newSelected = selected.includes(val)
+      ? selected.filter((x) => x !== val)
+      : [...selected, val];
+    handleFieldChange("categories", newSelected);
+  };
+
+  // Helper functions for indicator states
+  const getIndicatorState = (fieldName, value) => {
+    if (!touchedFields[fieldName]) return "default";
+    return value ? "filled" : "empty";
+  };
+
+  const handleFieldChange = (fieldName, value) => {
+    setTouchedFields((prev) => ({ ...prev, [fieldName]: true }));
+
+    switch (fieldName) {
+      case "title":
+        setTitle(value);
+        break;
+      case "description":
+        setDescription(value);
+        break;
+      case "categories":
+        setSelected(value);
+        break;
+      case "color":
+        setColorSelected(value);
+        break;
+      case "file":
+        setFile(value);
+        break;
+      default:
+        break;
+    }
+  };
 
   const selectedLabels = selected
     .map((v) => options.find((o) => o.value === v)?.label)
@@ -82,22 +127,47 @@ const Create = () => {
         <div className={styles.titleContainer}>
           <div className={styles.titleLine}>
             <p className={styles.title}>Title</p>
-            <div className={styles.indicatorTitle}>i</div>
+            <div
+              className={`${styles.indicatorTitle} ${styles[getIndicatorState("title", title)]}`}
+              title="Enter a title for your subject, that will help you identify it later"
+            >
+              i
+            </div>
           </div>
-          <input type="text" className={styles.titleInput} />
+          <input
+            type="text"
+            className={styles.titleInput}
+            value={title}
+            onChange={(e) => handleFieldChange("title", e.target.value)}
+          />
         </div>
         <div className={styles.titleContainer}>
           <div className={styles.descriptionLine}>
             <p className={styles.description}>Description</p>
-            <div className={styles.indicatorDescription}>i</div>
+            <div
+              className={`${styles.indicatorDescription} ${styles[getIndicatorState("description", description)]}`}
+              title="Describe what your subject will cover"
+            >
+              i
+            </div>
           </div>
-          <textarea maxLength="300" className={styles.descriptionInput} />
+          <textarea
+            maxLength="300"
+            className={styles.descriptionInput}
+            value={description}
+            onChange={(e) => handleFieldChange("description", e.target.value)}
+          />
         </div>
         <div className={styles.buttonContainer}>
           <div className={styles.bottomLeft}>
             <div className={styles.categoriesLine}>
               <p className={styles.categories}>Categories</p>
-              <div className={styles.indicatorCategories}>i</div>
+              <div
+                className={`${styles.indicatorCategories} ${styles[getIndicatorState("categories", selected.length > 0)]}`}
+                title="Select the type of study material you want to create"
+              >
+                i
+              </div>
             </div>
 
             {/* replaced native select with custom multi-select dropdown */}
@@ -136,7 +206,12 @@ const Create = () => {
           <div className={styles.bottomMid}>
             <div className={styles.colorLine}>
               <p className={styles.color}>Color</p>
-              <div className={styles.indicatorColor}>i</div>
+              <div
+                className={`${styles.indicatorColor} ${styles[getIndicatorState("color", colorSelected)]}`}
+                title="Choose a color theme for your subject"
+              >
+                i
+              </div>
             </div>
 
             <div className={styles.colorOptions}>
@@ -148,7 +223,7 @@ const Create = () => {
                     colorSelected === opt.id ? styles.selectedColor : ""
                   }`}
                   style={{ backgroundColor: opt.color }}
-                  onClick={() => setColorSelected(opt.id)}
+                  onClick={() => handleFieldChange("color", opt.id)}
                   aria-pressed={colorSelected === opt.id}
                 />
               ))}
@@ -157,8 +232,22 @@ const Create = () => {
           <div className={styles.bottomRight}>
             <div className={styles.fileLine}>
               <p className={styles.file}>File</p>
-              <div className={styles.indicatorFile}>i</div>
+              <div
+                className={`${styles.indicatorFile} ${styles[getIndicatorState("file", !!file)]}`}
+                title={file ? `File selected: ${file.name}` : "Upload a file for the subject"}
+              >
+                i
+              </div>
             </div>
+            <input
+              type="file"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={(e) => {
+                const selectedFile = e.target.files?.[0] || null;
+                handleFieldChange("file", selectedFile);
+              }}
+            />
             <div className={styles.fileUpload}>
               <Button
                 text="Upload"
@@ -166,14 +255,14 @@ const Create = () => {
                 height="40px"
                 width="120px"
                 fontSize="16px"
+                onClick={() => fileInputRef.current?.click()}
               />
               <Button
                 text="Complete"
                 color="#6a5be2"
                 height="40px"
                 width="120px"
-                fontSize="16px"
-              />
+                fontSize="16px" />
             </div>
           </div>
         </div>
