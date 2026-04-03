@@ -7,7 +7,7 @@ import gitHub from "../../assets/gitHubLogIn.svg";
 import divider from "../../assets/divider.svg";
 
 const LogIn = () => {
-  const { login } = useAuth();
+  const { login, signup, signInWithGoogle } = useAuth();
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
@@ -27,31 +27,25 @@ const LogIn = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
+  async function handleGoogleSignIn() {
+    try {
+      setError("");
+      await signInWithGoogle();
+    } catch (err) {
+      setError(err.message || "Google sign-in failed. Please try again.");
+    }
+  }
+
   async function handleLoginSubmit(e) {
     e.preventDefault();
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
-
-      const data = await response.json();
-      if (response.ok) {
-        const loggedUser = data.user;
-        login(loggedUser);
-        alert("Login successful!");
-        navigate("/");
-      } else {
-        setError(data.error);
-      }
+      await login(formData.email, formData.password);
+      alert("Login successful!");
+      navigate("/");
     } catch (err) {
-      setError("Network error. Try again.");
+      setError(err.message || "Login failed. Please check your credentials.");
     }
   }
 
@@ -60,25 +54,20 @@ const LogIn = () => {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:5000/api/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          lastName: formData.lastName,
-          email: formData.email,
-          password: formData.password,
-        }),
+      await signup(formData.email, formData.password, {
+        name: formData.name,
+        lastName: formData.lastName,
       });
-
-      const data = await response.json();
-      if (response.ok) {
-        setIsLoginMode(true);
-      } else {
-        setError(data.error);
-      }
+      alert("Signup successful! Please log in.");
+      setIsLoginMode(true);
+      setFormData({
+        name: "",
+        lastName: "",
+        email: "",
+        password: "",
+      });
     } catch (err) {
-      setError("Network error. Try again.");
+      setError(err.message || "Signup failed. Please try again.");
     }
   }
 
@@ -100,7 +89,11 @@ const LogIn = () => {
         <div className={styles.lowerMain}>
           {/* --- EASY LOGIN BUTTONS (always shown) --- */}
           <div className={styles.easyLogIn}>
-            <div className={styles.googleLogIn}>
+            <div
+              className={styles.googleLogIn}
+              onClick={handleGoogleSignIn}
+              style={{ cursor: "pointer" }}
+            >
               <img src={google} alt="Google Logo" className={styles.images} />
             </div>
             <div className={styles.gitHubLogIn}>
