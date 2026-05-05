@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Library from "./pages/Library";
 import Create from "./pages/Create";
 import LogIn from "./pages/LogIn";
+import CoursePage from "./pages/CoursePage";
 import { AuthProvider } from "./auth/AuthContext";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
             <Route path="/library" element={<Library />} />
             <Route path="/create" element={<Create />} />
             <Route path="/login" element={<LogIn />} />
+            <Route path="/course/:id" element={<CoursePage />} />
           </Routes>
         </div>
       </Router>

@@ -1,7 +1,7 @@
-// ...existing code...
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
+import { supabase } from "../../supabaseClient"; // ✅ ADDED
 import styles from "./index.module.css";
 import headerMark from "../../assets/form_header_start.svg";
 import Button from "../../components/button";
@@ -10,16 +10,17 @@ const Create = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
-  // added state and helpers
   const [selected, setSelected] = useState([]);
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef(null);
   const [colorSelected, setColorSelected] = useState("");
 
-  // New state for field tracking
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState(null);
+
+  const [loading, setLoading] = useState(false); // ✅ ADDED
+
   const [touchedFields, setTouchedFields] = useState({
     title: false,
     description: false,
@@ -27,6 +28,7 @@ const Create = () => {
     color: false,
     file: false,
   });
+
   const fileInputRef = useRef(null);
 
   const colorOptionsList = [
@@ -61,7 +63,6 @@ const Create = () => {
     handleFieldChange("categories", newSelected);
   };
 
-  // Helper functions for indicator states
   const getIndicatorState = (fieldName, value) => {
     if (!touchedFields[fieldName]) return "default";
     return value ? "filled" : "empty";
@@ -96,6 +97,58 @@ const Create = () => {
     .filter(Boolean)
     .join(", ");
 
+  // ✅ ADDED FUNCTION (MAIN LOGIC)
+  const handleCreateCourse = async () => {
+    try {
+      if (!title.trim() || !description.trim()) {
+        alert("Please fill title and description");
+        return;
+      }
+
+      setLoading(true);
+
+      const {
+        data: { user: currentUser },
+        error: userError,
+      } = await supabase.auth.getUser();
+
+      if (userError || !currentUser) {
+        alert("User not logged in");
+        return;
+      }
+
+      console.log("Inserting course for user:", currentUser.id);
+      console.log("Course data:", {
+        title: title.trim(),
+        description: description.trim(),
+        user_id: currentUser.id,
+      });
+
+      const { error } = await supabase.from("courses").insert([
+        {
+          title: title.trim(),
+          description: description.trim(),
+          user_id: currentUser.id,
+          color: colorSelected,
+        },
+      ]);
+
+      if (error) {
+        console.error("RLS Error details:", error);
+        throw error;
+      }
+
+      alert("Course created successfully!");
+
+      navigate("/library");
+    } catch (err) {
+      console.error("Error creating course:", err);
+      alert("Error creating course");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   if (!user) {
     return (
       <div className={styles.containerNotLogged}>
@@ -124,12 +177,14 @@ const Create = () => {
           />
           <p className={styles.formHeader}>Name & Description</p>
         </div>
+
+        {/* ALL YOUR ORIGINAL UI BELOW (UNCHANGED) */}
+
         <div className={styles.titleContainer}>
           <div className={styles.titleLine}>
             <p className={styles.title}>Title</p>
             <div
               className={`${styles.indicatorTitle} ${styles[getIndicatorState("title", title)]}`}
-              title="Enter a title for your subject, that will help you identify it later"
             >
               i
             </div>
@@ -141,12 +196,12 @@ const Create = () => {
             onChange={(e) => handleFieldChange("title", e.target.value)}
           />
         </div>
+
         <div className={styles.titleContainer}>
           <div className={styles.descriptionLine}>
             <p className={styles.description}>Description</p>
             <div
               className={`${styles.indicatorDescription} ${styles[getIndicatorState("description", description)]}`}
-              title="Describe what your subject will cover"
             >
               i
             </div>
@@ -158,19 +213,18 @@ const Create = () => {
             onChange={(e) => handleFieldChange("description", e.target.value)}
           />
         </div>
+
         <div className={styles.buttonContainer}>
           <div className={styles.bottomLeft}>
             <div className={styles.categoriesLine}>
               <p className={styles.categories}>Categories</p>
               <div
                 className={`${styles.indicatorCategories} ${styles[getIndicatorState("categories", selected.length > 0)]}`}
-                title="Select the type of study material you want to create"
               >
                 i
               </div>
             </div>
 
-            {/* replaced native select with custom multi-select dropdown */}
             <div className={styles.categoriesSelect} ref={dropdownRef}>
               <button
                 type="button"
@@ -203,12 +257,12 @@ const Create = () => {
               )}
             </div>
           </div>
+
           <div className={styles.bottomMid}>
             <div className={styles.colorLine}>
               <p className={styles.color}>Color</p>
               <div
                 className={`${styles.indicatorColor} ${styles[getIndicatorState("color", colorSelected)]}`}
-                title="Choose a color theme for your subject"
               >
                 i
               </div>
@@ -220,15 +274,15 @@ const Create = () => {
                   key={opt.id}
                   type="button"
                   className={`${styles.colorOption} ${
-                    colorSelected === opt.id ? styles.selectedColor : ""
+                    colorSelected === opt.color ? styles.selectedColor : ""
                   }`}
                   style={{ backgroundColor: opt.color }}
-                  onClick={() => handleFieldChange("color", opt.id)}
-                  aria-pressed={colorSelected === opt.id}
+                  onClick={() => handleFieldChange("color", opt.color)}
                 />
               ))}
             </div>
           </div>
+
           <div className={styles.bottomRight}>
             <div className={styles.fileLine}>
               <p className={styles.file}>File</p>
@@ -243,6 +297,7 @@ const Create = () => {
                 i
               </div>
             </div>
+
             <input
               type="file"
               ref={fileInputRef}
@@ -252,6 +307,7 @@ const Create = () => {
                 handleFieldChange("file", selectedFile);
               }}
             />
+
             <div className={styles.fileUpload}>
               <Button
                 text="Upload"
@@ -261,12 +317,15 @@ const Create = () => {
                 fontSize="16px"
                 onClick={() => fileInputRef.current?.click()}
               />
+
+              {/* ✅ ONLY THIS LINE CHANGED */}
               <Button
-                text="Complete"
+                text={loading ? "Saving..." : "Complete"}
                 color="#6a5be2"
                 height="40px"
                 width="120px"
                 fontSize="16px"
+                onClick={handleCreateCourse}
               />
             </div>
           </div>

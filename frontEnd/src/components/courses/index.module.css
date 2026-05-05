@@ -1,18 +1,82 @@
 .container {
-  border: 1px solid #ccc;
   padding: 1rem;
   margin: 1rem 0;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+  border-radius: 25px;
   height: 250px;
   width: 250px;
+  position: relative;
+  cursor: pointer;
+}
+
+.container:hover {
+  transform: translateY(-7px);
+  transition: all 0.3s ease;
 }
 
 .title {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  color: #ffffff;
 }
 
 .description {
-  color: #666;
+  color: #ffffff;
+  font-size: 0.8rem;
+}
+
+.deleteBtn {
+  all: unset;
+  border: none;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteBtn:hover {
+  animation: shake 0.5s ease-in-out;
+}
+
+.deleteBtn:active {
+  outline: none;
+  border: none;
+}
+
+.deleteBtn:focus {
+  outline: none;
+  border: none;
+}
+
+.deleteBtn:hover .trashIcon {
+  stroke: #ff0000;
+  fill: #ff0000;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-3px) rotate(-5deg);
+  }
+  50% {
+    transform: translateX(3px) rotate(5deg);
+  }
+  75% {
+    transform: translateX(-3px) rotate(-5deg);
+  }
+}
+
+.courseUpper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.trashIcon {
+  width: 30px;
+  height: 30px;
 }
