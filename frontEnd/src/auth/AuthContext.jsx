@@ -7,6 +7,37 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  // Create user profile in database
+  const createUserProfile = async (authUser) => {
+    try {
+      const { data, error } = await supabase
+        .from("users")
+        .select("id")
+        .eq("id", authUser.id)
+        .single();
+
+      // If user profile doesn't exist, create it
+      if (error?.code === "PGRST116") {
+        const { error: insertError } = await supabase.from("users").insert([
+          {
+            id: authUser.id,
+            email: authUser.email,
+            name: authUser.user_metadata?.name || "",
+            avatar_url: authUser.user_metadata?.avatar_url || "",
+            provider: authUser.app_metadata?.provider || "email",
+            created_at: new Date(),
+          },
+        ]);
+
+        if (insertError) {
+          console.error("Error creating user profile:", insertError);
+        }
+      }
+    } catch (error) {
+      console.error("Error in createUserProfile:", error);
+    }
+  };
+
   // Get initial session on mount
   useEffect(() => {
     const getInitialSession = async () => {
@@ -15,6 +46,7 @@ export const AuthProvider = ({ children }) => {
       } = await supabase.auth.getSession();
       if (session?.user) {
         setUser(session.user);
+        await createUserProfile(session.user);
       }
       setLoading(false);
     };
@@ -24,9 +56,13 @@ export const AuthProvider = ({ children }) => {
     // Listen for auth state changes
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
+    } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (session?.user) {
         setUser(session.user);
+        // Create profile on sign up or SSO sign in
+        if (event === "SIGNED_IN" || event === "USER_UPDATED") {
+          await createUserProfile(session.user);
+        }
       } else {
         setUser(null);
       }
@@ -68,7 +104,18 @@ export const AuthProvider = ({ children }) => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: window.location.origin,
+        redirectTo: `${window.location.origin}/login`,
+      },
+    });
+    if (error) throw error;
+    return data;
+  };
+
+  const signInWithGitHub = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: `${window.location.origin}/login`,
       },
     });
     if (error) throw error;
@@ -77,7 +124,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, login, signup, logout, signInWithGoogle, loading }}
+      value={{
+        user,
+        login,
+        signup,
+        logout,
+        signInWithGoogle,
+        signInWithGitHub,
+        loading,
+      }}
     >
       {children}
     </AuthContext.Provider>

@@ -7,7 +7,7 @@ import gitHub from "../../assets/gitHubLogIn.svg";
 import divider from "../../assets/divider.svg";
 
 const LogIn = () => {
-  const { login, signup, signInWithGoogle } = useAuth();
+  const { login, signup, signInWithGoogle, signInWithGitHub } = useAuth();
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
@@ -31,8 +31,19 @@ const LogIn = () => {
     try {
       setError("");
       await signInWithGoogle();
+      // OAuth will redirect, profile creation happens in AuthContext
     } catch (err) {
       setError(err.message || "Google sign-in failed. Please try again.");
+    }
+  }
+
+  async function handleGitHubSignIn() {
+    try {
+      setError("");
+      await signInWithGitHub();
+      // OAuth will redirect, profile creation happens in AuthContext
+    } catch (err) {
+      setError(err.message || "GitHub sign-in failed. Please try again.");
     }
   }
 
@@ -93,10 +104,16 @@ const LogIn = () => {
               className={styles.googleLogIn}
               onClick={handleGoogleSignIn}
               style={{ cursor: "pointer" }}
+              title="Sign in with Google"
             >
               <img src={google} alt="Google Logo" className={styles.images} />
             </div>
-            <div className={styles.gitHubLogIn}>
+            <div
+              className={styles.gitHubLogIn}
+              onClick={handleGitHubSignIn}
+              style={{ cursor: "pointer" }}
+              title="Sign in with GitHub"
+            >
               <img src={gitHub} alt="GitHub Logo" className={styles.images} />
             </div>
           </div>
