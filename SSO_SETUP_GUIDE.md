@@ -1,6 +1,7 @@
 # SSO Authentication Setup Guide
 
 ## The Error You're Getting
+
 `{"code":400,"error_code":"validation_failed","msg":"Unsupported provider: provider is not enabled"}`
 
 This means Google and GitHub OAuth providers are not enabled in your Supabase project.
@@ -17,7 +18,7 @@ This means Google and GitHub OAuth providers are not enabled in your Supabase pr
 4. Find **Google** and click **Enable**
 5. You'll need:
    - **Google Client ID** and **Google Client Secret**
-   
+
    #### Get Google Credentials:
    - Go to [Google Cloud Console](https://console.cloud.google.com)
    - Create a new project or select existing one
@@ -38,7 +39,7 @@ This means Google and GitHub OAuth providers are not enabled in your Supabase pr
 1. In **Authentication** → **Providers**, find **GitHub** and click **Enable**
 2. You'll need:
    - **GitHub Client ID** and **GitHub Client Secret**
-   
+
    #### Get GitHub Credentials:
    - Go to GitHub → **Settings** → **Developer settings** → **OAuth Apps**
    - Click **New OAuth App**
@@ -72,18 +73,18 @@ CREATE TABLE IF NOT EXISTS users (
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 
 -- Allow users to read their own data
-CREATE POLICY "Users can read their own data" 
-  ON users FOR SELECT 
+CREATE POLICY "Users can read their own data"
+  ON users FOR SELECT
   USING (auth.uid() = id);
 
 -- Allow users to update their own data
-CREATE POLICY "Users can update their own data" 
-  ON users FOR UPDATE 
+CREATE POLICY "Users can update their own data"
+  ON users FOR UPDATE
   USING (auth.uid() = id);
 
 -- Allow inserting own user data
-CREATE POLICY "Users can insert their own data" 
-  ON users FOR INSERT 
+CREATE POLICY "Users can insert their own data"
+  ON users FOR INSERT
   WITH CHECK (auth.uid() = id);
 ```
 
@@ -92,6 +93,7 @@ CREATE POLICY "Users can insert their own data"
 ## 🔄 How It Works Now
 
 ### First Time SSO Login:
+
 1. User clicks **Google** or **GitHub** button
 2. Redirected to provider's login
 3. After authentication, redirected back to `/login`
@@ -99,6 +101,7 @@ CREATE POLICY "Users can insert their own data"
 5. User is logged in and can access the app
 
 ### Second Time & Beyond:
+
 1. User clicks the SSO button
 2. If they already have an account, they're logged in directly
 3. Profile already exists in database, so no duplicate is created
@@ -108,15 +111,18 @@ CREATE POLICY "Users can insert their own data"
 ## 📝 Code Changes Made
 
 ### ✅ AuthContext (`src/auth/AuthContext.jsx`):
+
 - Added `createUserProfile()` function that checks if user exists
 - If first-time login, creates a profile in the `users` table
 - Added `signInWithGitHub()` for GitHub OAuth
 
 ### ✅ LogIn Page (`src/pages/LogIn/index.jsx`):
+
 - Added GitHub button handler `handleGitHubSignIn()`
 - Proper error handling for both Google and GitHub
 
 ### ✅ App Routes (`src/App.jsx`):
+
 - Already has the `/course/:id` route for course pages
 
 ---
@@ -133,12 +139,12 @@ CREATE POLICY "Users can insert their own data"
 
 ## 🐛 Troubleshooting
 
-| Error | Solution |
-|-------|----------|
-| `Unsupported provider` | OAuth provider not enabled in Supabase |
-| `Redirect URL mismatch` | Check your redirect URLs in OAuth app settings match Supabase |
-| `User table not found` | Run the SQL to create the `users` table |
-| Still redirecting to login | Check your `.env` variables are correct |
+| Error                      | Solution                                                      |
+| -------------------------- | ------------------------------------------------------------- |
+| `Unsupported provider`     | OAuth provider not enabled in Supabase                        |
+| `Redirect URL mismatch`    | Check your redirect URLs in OAuth app settings match Supabase |
+| `User table not found`     | Run the SQL to create the `users` table                       |
+| Still redirecting to login | Check your `.env` variables are correct                       |
 
 ---
 
